@@ -1,0 +1,10 @@
+20:57:42 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+
+20:57:43 Build Finished. 0 errors, 0 warnings. (took 1s.683ms)
+

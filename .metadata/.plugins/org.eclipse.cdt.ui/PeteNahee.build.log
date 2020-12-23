@@ -1,0 +1,10 @@
+20:57:39 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+
+20:57:41 Build Finished. 0 errors, 0 warnings. (took 1s.636ms)
+

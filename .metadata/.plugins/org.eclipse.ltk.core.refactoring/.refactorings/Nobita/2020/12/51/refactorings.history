@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;ros.h&apos; to &apos;rosserial&apos;" description="Move &apos;ros.h&apos; to &apos;rosserial&apos;" destination="rosserial" element1="ros.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1608197522980" updateReferences="true"/>
+</session>

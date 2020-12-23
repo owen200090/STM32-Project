@@ -1,0 +1,54 @@
+#ifndef _ROS_dombabot_hardware_interface_LegJointCommand_h
+#define _ROS_dombabot_hardware_interface_LegJointCommand_h
+
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include "ros/msg.h"
+#include "std_msgs/Float32.h"
+
+namespace dombabot_hardware_interface
+{
+
+  class LegJointCommand : public ros::Msg
+  {
+    public:
+      typedef std_msgs::Float32 _joint_1_orientation_type;
+      _joint_1_orientation_type joint_1_orientation;
+      typedef std_msgs::Float32 _joint_2_orientation_type;
+      _joint_2_orientation_type joint_2_orientation;
+      typedef std_msgs::Float32 _joint_3_orientation_type;
+      _joint_3_orientation_type joint_3_orientation;
+
+    LegJointCommand():
+      joint_1_orientation(),
+      joint_2_orientation(),
+      joint_3_orientation()
+    {
+    }
+
+    virtual int serialize(unsigned char *outbuffer) const
+    {
+      int offset = 0;
+      offset += this->joint_1_orientation.serialize(outbuffer + offset);
+      offset += this->joint_2_orientation.serialize(outbuffer + offset);
+      offset += this->joint_3_orientation.serialize(outbuffer + offset);
+      return offset;
+    }
+
+    virtual int deserialize(unsigned char *inbuffer)
+    {
+      int offset = 0;
+      offset += this->joint_1_orientation.deserialize(inbuffer + offset);
+      offset += this->joint_2_orientation.deserialize(inbuffer + offset);
+      offset += this->joint_3_orientation.deserialize(inbuffer + offset);
+     return offset;
+    }
+
+    const char * getType(){ return "dombabot_hardware_interface/LegJointCommand"; };
+    const char * getMD5(){ return "269cf341827b72fb9a499eb75222d7f4"; };
+
+  };
+
+}
+#endif

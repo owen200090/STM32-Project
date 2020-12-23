@@ -1,0 +1,10 @@
+20:57:35 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-size   Nobita.elf 
+   text	   data	    bss	    dec	    hex	filename
+  33836	    484	   1988	  36308	   8dd4	Nobita.elf
+Finished building: default.size.stdout
+ 
+
+20:57:38 Build Finished. 0 errors, 0 warnings. (took 2s.831ms)
+

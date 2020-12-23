@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;ros_lib&apos; to &apos;PeteNahee&apos;" description="Move &apos;ros_lib&apos; to &apos;PeteNahee&apos;" destination="/PeteNahee" element1="/Nobita/ros_lib" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1608703476752" updateReferences="true"/>
+</session>
