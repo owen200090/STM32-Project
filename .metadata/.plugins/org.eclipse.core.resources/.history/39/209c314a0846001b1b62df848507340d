@@ -74,10 +74,8 @@ uint8_t MSG1_length;
 uint8_t MSG2[50];
 uint8_t MSG2_length;
 
-uint32_t encoder_value_l = 0;
-uint32_t encoder_value_r = 0;
-float rpm_value_l = 0.00;
-float rpm_value_r = 0.00;
+uint32_t encoder_value = 0;
+float rpm_value = 0.00;
 
 float linear_vel_x = 0.0;
 float angular_vel_z = 0.0;
@@ -136,13 +134,9 @@ void set_speed(float Vx, float W){
 	}
 	wheel_l = _Wl;
 	wheel_r = _Wr;
-//	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR_PWM_Pin,direction_l);
-	HAL_GPIO_WritePin(MOTOR_DIRECTION1_GPIO_Port,MOTOR_DIRECTION1_Pin,direction_l);
-	HAL_GPIO_WritePin(MOTOR_DIRECTION2_GPIO_Port,MOTOR_DIRECTION2_Pin,!direction_l);
+	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR_PWM_Pin,direction_l);
 	 __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, _Wl);
-	//HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR2_PWM_Pin,direction_r);
-	 HAL_GPIO_WritePin(MOTOR2_DIRECTION1_GPIO_Port,MOTOR2_DIRECTION1_Pin,direction_r);
-	 HAL_GPIO_WritePin(MOTOR2_DIRECTION2_GPIO_Port,MOTOR2_DIRECTION2_Pin,!direction_r);
+	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR2_PWM_Pin,direction_r);
 	 __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, _Wr);
 }
 /* USER CODE END 0 */
@@ -196,7 +190,7 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-//  MSG1_length = sprintf(MSG1,"HELLO\n");
+  MSG1_length = sprintf(MSG1,"HELLO\n");
   HAL_UART_Transmit_IT(&huart2, MSG1, MSG1_length);
 
   HAL_UART_Receive_IT(&huart2, RX2_Char, 1);
@@ -211,8 +205,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	encoder_l = encoder_value_l;
-	encoder_r = encoder_value_r;
+	//encoder_l =
 	//encoder_r =
 	  getTime();
 	  //Left wheel
@@ -558,15 +551,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 //	HAL_GPIO_TogglePin(Ld2_GPIO_Port,Ld2_Pin);
 
-	encoder_value_l = htim3.Instance->CNT - 30000;
-	encoder_value_r = htim3.Instance->CNT - 30000;
+	encoder_value = htim3.Instance->CNT - 30000;
 	htim3.Instance->CNT = 30000;
-	rpm_value_l = encoder_value_l*60.0/46000.0;
-	rpm_value_r = encoder_value_r*60.0/46000.0;
-	MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
-	MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+	rpm_value = encoder_value*60.0/46000.0;
+	MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value, rpm_value);
 	HAL_UART_Transmit_IT(&huart2, MSG1, MSG1_length);
-	HAL_UART_Transmit_IT(&huart2, MSG2, MSG2_length);
 }
 
 /* USER CODE END 4 */

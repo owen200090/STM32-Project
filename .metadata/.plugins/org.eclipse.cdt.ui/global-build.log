@@ -12325,3 +12325,1062 @@ arm-none-eabi-size   Shisuka.elf
   16256	    120	   1832	  18208	   4720	Shisuka.elf
 Finished building: default.size.stdout
  
+23:51:39 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:103:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:111:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:112:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:152:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:157:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:157:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:157:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:158:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:158:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:159:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:159:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:159:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:160:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:160:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:160:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:160:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:161:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:162:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:163:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:25: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+   MSG1_length = sprintf(MSG1,"HELLO\n");
+                         ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:214:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:215:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:217:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:218:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:219:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:156:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:220:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:156:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:535:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:559:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value, rpm_value);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:559:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value, rpm_value);
+                                        ~^
+                                        %ld
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:163:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+23:51:40 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+23:51:40 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+23:52:58 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:103:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:111:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:112:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:154:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:159:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:159:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:159:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:160:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:160:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:161:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:161:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:162:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:162:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:162:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:162:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:163:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:163:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:164:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:165:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:197:25: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+   MSG1_length = sprintf(MSG1,"HELLO\n");
+                         ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:216:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:217:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:219:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:220:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:221:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:158:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:222:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:158:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:537:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:561:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value, rpm_value);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:561:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value, rpm_value);
+                                        ~^
+                                        %ld
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:165:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+23:52:59 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+23:53:00 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+00:02:38 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:103:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:111:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:112:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:154:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:159:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:159:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:159:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:160:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:160:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:161:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:161:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:162:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:162:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:162:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:162:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:163:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:163:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:164:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:165:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:216:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:217:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:219:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:220:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:221:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:158:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:222:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:158:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:537:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:558:2: error: 'encoder_value_l' undeclared (first use in this function); did you mean 'encoder_value'?
+  encoder_value_l = htim3.Instance->CNT - 30000;
+  ^~~~~~~~~~~~~~~
+  encoder_value
+../Core/Src/main.c:558:2: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:559:2: error: 'encoder_value_r' undeclared (first use in this function); did you mean 'encoder_value_l'?
+  encoder_value_r = htim3.Instance->CNT - 30000;
+  ^~~~~~~~~~~~~~~
+  encoder_value_l
+../Core/Src/main.c:561:2: error: 'rpm_value_l' undeclared (first use in this function); did you mean 'rpm_value'?
+  rpm_value_l = encoder_value_l*60.0/46000.0;
+  ^~~~~~~~~~~
+  rpm_value
+../Core/Src/main.c:562:2: error: 'rpm_value_r' undeclared (first use in this function); did you mean 'rpm_value_l'?
+  rpm_value_r = encoder_value_r*60.0/46000.0;
+  ^~~~~~~~~~~
+  rpm_value_l
+../Core/Src/main.c:563:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:564:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:165:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+00:02:39 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+00:02:40 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+00:03:18 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:104:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:112:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:115:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:155:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:160:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:160:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:160:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:161:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:162:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:162:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:162:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:163:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:163:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:163:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:163:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:164:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:164:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:165:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:166:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:217:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:218:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:220:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:221:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:222:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:159:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:223:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:159:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:538:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:562:2: error: 'rpm_value_l' undeclared (first use in this function); did you mean 'rpm_value'?
+  rpm_value_l = encoder_value_l*60.0/46000.0;
+  ^~~~~~~~~~~
+  rpm_value
+../Core/Src/main.c:562:2: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:563:2: error: 'rpm_value_r' undeclared (first use in this function); did you mean 'rpm_value_l'?
+  rpm_value_r = encoder_value_r*60.0/46000.0;
+  ^~~~~~~~~~~
+  rpm_value_l
+../Core/Src/main.c:564:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:565:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:166:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+00:03:20 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+00:03:20 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+00:04:18 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:105:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:115:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:116:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:156:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:161:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:161:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:162:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:162:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:163:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:163:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:163:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:164:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:164:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:164:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:164:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:165:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:165:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:166:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:167:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:218:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:219:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:221:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:222:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:223:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:160:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:224:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:160:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:539:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:565:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:565:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                                        ~^
+                                        %ld
+../Core/Src/main.c:566:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:566:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                                        ~^
+                                        %ld
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+00:04:19 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+00:04:20 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+00:05:28 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:105:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:115:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:116:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:156:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:161:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:161:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:162:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:162:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:163:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:163:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:163:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:164:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:164:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:164:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:164:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:165:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:165:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:166:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:167:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:219:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:220:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:222:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:223:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:224:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:160:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:225:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:160:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:540:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:566:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:566:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                                        ~^
+                                        %ld
+../Core/Src/main.c:567:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:567:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                                        ~^
+                                        %ld
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+00:05:29 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+00:05:30 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 
+00:05:48 **** Incremental Build of configuration Debug for project Nobita ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:105:14: error: expected ':', ',', ';', '}' or '__attribute__' before '=' token
+  float input = 0;
+              ^
+../Core/Src/main.c:113:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:114:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_wheel;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:115:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues left_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c:116:1: error: unknown type name 'PIDValues'; use 'struct' keyword to refer to the type
+ PIDValues right_steer;
+ ^~~~~~~~~
+ struct 
+../Core/Src/main.c: In function 'getTime':
+../Core/Src/main.c:156:16: warning: implicit declaration of function 'millis' [-Wimplicit-function-declaration]
+  currentTime = millis();
+                ^~~~~~
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:161:7: error: 'struct PIDValues' has no member named 'error'
+  wheel.error = wheel.setPoint - wheel.input;
+       ^
+../Core/Src/main.c:161:21: error: 'struct PIDValues' has no member named 'setPoint'
+  wheel.error = wheel.setPoint - wheel.input;
+                     ^
+../Core/Src/main.c:161:38: error: 'struct PIDValues' has no member named 'input'
+  wheel.error = wheel.setPoint - wheel.input;
+                                      ^
+../Core/Src/main.c:162:7: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.cumError += wheel.error * elapsedTime;
+       ^
+../Core/Src/main.c:162:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.cumError += wheel.error * elapsedTime;
+                         ^
+../Core/Src/main.c:163:7: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+       ^
+../Core/Src/main.c:163:27: error: 'struct PIDValues' has no member named 'error'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                           ^
+../Core/Src/main.c:163:41: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+                                         ^
+../Core/Src/main.c:164:7: error: 'struct PIDValues' has no member named 'output'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+       ^
+../Core/Src/main.c:164:25: error: 'struct PIDValues' has no member named 'error'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                         ^
+../Core/Src/main.c:164:42: error: 'struct PIDValues' has no member named 'cumError'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                          ^
+../Core/Src/main.c:164:62: error: 'struct PIDValues' has no member named 'rateErorr'
+  wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+                                                              ^
+../Core/Src/main.c:165:7: error: 'struct PIDValues' has no member named 'error_p'
+  wheel.error_p = wheel.error;
+       ^
+../Core/Src/main.c:165:23: error: 'struct PIDValues' has no member named 'error'
+  wheel.error_p = wheel.error;
+                       ^
+../Core/Src/main.c:166:14: error: 'struct PIDValues' has no member named 'output'
+  return wheel.output
+              ^
+../Core/Src/main.c:167:1: error: expected ';' before '}' token
+ }
+ ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:219:14: error: request for member 'input' in something not a structure or union
+    left_wheel.input = encoder_l;
+              ^
+../Core/Src/main.c:220:14: error: request for member 'setPoint' in something not a structure or union
+    left_wheel.setPoint = wheel_l;
+              ^
+../Core/Src/main.c:222:15: error: request for member 'input' in something not a structure or union
+    right_wheel.input = encoder_r;
+               ^
+../Core/Src/main.c:223:15: error: request for member 'setPoint' in something not a structure or union
+    right_wheel.setPoint = wheel_r;
+               ^
+../Core/Src/main.c:224:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_L = computePID(left_wheel);
+                          ^~~~~~~~~~
+../Core/Src/main.c:160:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c:225:26: error: incompatible type for argument 1 of 'computePID'
+    PIDOut_R = computePID(right_wheel);
+                          ^~~~~~~~~~~
+../Core/Src/main.c:160:7: note: expected 'struct PIDValues' but argument is of type 'int'
+ float computePID(struct PIDValues wheel){
+       ^~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:540:26: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+    MSG1_length = sprintf(MSG1,"Set Speed = %d\n", speed);
+                          ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/main.c:566:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:566:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG1_length = sprintf(MSG1,"Encoder = %d RPM = %.2f\n", encoder_value_l, rpm_value_l);
+                                        ~^
+                                        %ld
+../Core/Src/main.c:567:24: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                        ^~~~
+In file included from ../Core/Src/main.c:25:0:
+c:\st\stm32cubeide_1.4.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.4.0.202007081208\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:567:41: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  MSG2_length = sprintf(MSG2,"Encoder = %d RPM = %.2f\n", encoder_value_r, rpm_value_r);
+                                        ~^
+                                        %ld
+../Core/Src/main.c: In function 'computePID':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Core/Src/subdir.mk:33: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+00:05:49 **** Incremental Build of configuration Debug for project PeteNahee ****
+make -j8 all 
+arm-none-eabi-size   PeteNahee.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4972	     20	   1572	   6564	   19a4	PeteNahee.elf
+Finished building: default.size.stdout
+ 
+00:05:50 **** Incremental Build of configuration Debug for project Shisuka ****
+make -j8 all 
+arm-none-eabi-size   Shisuka.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16256	    120	   1832	  18208	   4720	Shisuka.elf
+Finished building: default.size.stdout
+ 

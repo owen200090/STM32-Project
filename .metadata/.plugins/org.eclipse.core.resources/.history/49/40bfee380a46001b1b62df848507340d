@@ -211,8 +211,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	encoder_l = encoder_value_l;
-	encoder_r = encoder_value_r;
+	//encoder_l =
 	//encoder_r =
 	  getTime();
 	  //Left wheel

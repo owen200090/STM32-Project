@@ -74,10 +74,8 @@ uint8_t MSG1_length;
 uint8_t MSG2[50];
 uint8_t MSG2_length;
 
-uint32_t encoder_value_l = 0;
-uint32_t encoder_value_r = 0;
-float rpm_value_l = 0.00;
-float rpm_value_r = 0.00;
+uint32_t encoder_value = 0;
+float rpm_value = 0.00;
 
 float linear_vel_x = 0.0;
 float angular_vel_z = 0.0;
@@ -211,8 +209,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	encoder_l = encoder_value_l;
-	encoder_r = encoder_value_r;
+	//encoder_l =
 	//encoder_r =
 	  getTime();
 	  //Left wheel
