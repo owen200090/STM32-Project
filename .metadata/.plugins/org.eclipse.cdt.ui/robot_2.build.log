@@ -1,10 +1,74 @@
-21:24:52 **** Incremental Build of configuration Debug for project robot_2 ****
+11:41:14 **** Incremental Build of configuration Debug for project robot_2 ****
 make -j8 all 
-arm-none-eabi-size   robot_2.elf 
-   text	   data	    bss	    dec	    hex	filename
- 185068	    756	  10128	 195952	  2fd70	robot_2.elf
-Finished building: default.size.stdout
- 
+arm-none-eabi-g++ "../Core/Src/mainpp.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/mainpp.d" -MT"Core/Src/mainpp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mainpp.o"
+In file included from ../Core/Inc/ros.h:39:0,
+                 from ../Core/Src/mainpp.cpp:10:
+../Core/Inc/STM32Hardware.h: In member function 'void STM32Hardware::write(uint8_t*, int)':
+../Core/Inc/STM32Hardware.h:112:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       int n_tail = n <= tbuflen - twind ? n : tbuflen - twind;
+                    ~~^~~~~~~~~~~~~~~~~~
+../Core/Src/mainpp.cpp: At global scope:
+../Core/Src/mainpp.cpp:58:11: error: 'Float64' in namespace 'std_msgs' does not name a type
+ std_msgs::Float64 float_msg;
+           ^~~~~~~
+../Core/Src/mainpp.cpp:61:22: error: 'geometry_msgs' does not name a type
+ void cmd_subCb(const geometry_msgs::Twist& toggle_msg){
+                      ^~~~~~~~~~~~~
+../Core/Src/mainpp.cpp:61:42: error: expected unqualified-id before '&' token
+ void cmd_subCb(const geometry_msgs::Twist& toggle_msg){
+                                          ^
+../Core/Src/mainpp.cpp:61:42: error: expected ')' before '&' token
+../Core/Src/mainpp.cpp:61:44: error: expected initializer before 'toggle_msg'
+ void cmd_subCb(const geometry_msgs::Twist& toggle_msg){
+                                            ^~~~~~~~~~
+../Core/Src/mainpp.cpp:66:17: error: 'geometry_msgs' was not declared in this scope
+ ros::Subscriber<geometry_msgs::Twist> cmd_sub("cmd_vel", &cmd_subCb);
+                 ^~~~~~~~~~~~~
+../Core/Src/mainpp.cpp:66:37: error: template argument 1 is invalid
+ ros::Subscriber<geometry_msgs::Twist> cmd_sub("cmd_vel", &cmd_subCb);
+                                     ^
+../Core/Src/mainpp.cpp:66:59: error: 'cmd_subCb' was not declared in this scope
+ ros::Subscriber<geometry_msgs::Twist> cmd_sub("cmd_vel", &cmd_subCb);
+                                                           ^~~~~~~~~
+../Core/Src/mainpp.cpp:66:59: note: suggested alternative: 'cmd_sub'
+ ros::Subscriber<geometry_msgs::Twist> cmd_sub("cmd_vel", &cmd_subCb);
+                                                           ^~~~~~~~~
+                                                           cmd_sub
+../Core/Src/mainpp.cpp:66:68: error: expression list treated as compound expression in initializer [-fpermissive]
+ ros::Subscriber<geometry_msgs::Twist> cmd_sub("cmd_vel", &cmd_subCb);
+                                                                    ^
+../Core/Src/mainpp.cpp: In function 'void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)':
+../Core/Src/mainpp.cpp:385:77: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  sOut = sprintf(buffer,"Encoder = %d RPM = %.2f\n", encoder_value, rpm_value);
+                                                                             ^
+In file included from ../Core/Inc/ros.h:38:0,
+                 from ../Core/Src/mainpp.cpp:10:
+../Core/Inc/ros/node_handle.h: In instantiation of 'bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::subscribe(SubscriberT&) [with SubscriberT = int; Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 512; int OUTPUT_SIZE = 512]':
+../Core/Src/mainpp.cpp:392:22:   required from here
+../Core/Inc/ros/node_handle.h:438:26: error: invalid static_cast from type 'int*' to type 'ros::Subscriber_*'
+         subscribers[i] = static_cast<Subscriber_*>(&s);
+                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Inc/ros/node_handle.h:439:11: error: request for member 'id_' in 's', which is of non-class type 'int'
+         s.id_ = i + 100;
+         ~~^~~
+../Core/Src/mainpp.cpp: At global scope:
+../Core/Src/mainpp.cpp:346:13: warning: 'void MX_GPIO_Init()' defined but not used [-Wunused-function]
+ static void MX_GPIO_Init(void)
+             ^~~~~~~~~~~~
+../Core/Src/mainpp.cpp:318:13: warning: 'void MX_USART2_UART_Init()' defined but not used [-Wunused-function]
+ static void MX_USART2_UART_Init(void)
+             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/mainpp.cpp:270:13: warning: 'void MX_TIM4_Init()' defined but not used [-Wunused-function]
+ static void MX_TIM4_Init(void)
+             ^~~~~~~~~~~~
+../Core/Src/mainpp.cpp:226:13: warning: 'void MX_TIM3_Init()' defined but not used [-Wunused-function]
+ static void MX_TIM3_Init(void)
+             ^~~~~~~~~~~~
+../Core/Src/mainpp.cpp:185:13: warning: 'void MX_TIM1_Init()' defined but not used [-Wunused-function]
+ static void MX_TIM1_Init(void)
+             ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:42: Core/Src/mainpp.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
 
-21:24:53 Build Finished. 0 errors, 0 warnings. (took 262ms)
+11:41:16 Build Failed. 12 errors, 7 warnings. (took 1s.358ms)
 

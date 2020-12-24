@@ -63,8 +63,6 @@ void Error_Handler(void);
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
 #define B1_EXTI_IRQn EXTI15_10_IRQn
-#define Ld2_Pin GPIO_PIN_5
-#define Ld2_GPIO_Port GPIOA
 #define MOTOR2_PWM_Pin GPIO_PIN_9
 #define MOTOR2_PWM_GPIO_Port GPIOA
 #define MOTOR_PWM_Pin GPIO_PIN_10
@@ -75,6 +73,14 @@ void Error_Handler(void);
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
+#define MOTOR_DIRECTION1_Pin GPIO_PIN_4
+#define MOTOR_DIRECTION1_GPIO_Port GPIOB
+#define MOTOR_DIRECTION2_Pin GPIO_PIN_5
+#define MOTOR_DIRECTION2_GPIO_Port GPIOB
+#define MOTOR2_DIRECTION1_Pin GPIO_PIN_8
+#define MOTOR2_DIRECTION1_GPIO_Port GPIOB
+#define MOTOR2_DIRECTION2_Pin GPIO_PIN_9
+#define MOTOR2_DIRECTION2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
@@ -76,18 +77,66 @@ uint8_t MSG2_length;
 uint32_t encoder_value = 0;
 float rpm_value = 0.00;
 
+float linear_vel_x = 0.0;
+float angular_vel_z = 0.0;
+float wheel_l = 0.0;
+float wheel_r = 0.0;
+int direction_l = 0;
+int direction_r = 0;
+float encoder_l = 0.0;
+float encoder_r = 0.0;
+
+//PID Variables
+float kp = 1;
+float ki = 0.01;
+float kd = 1;
+//Set point is wheel_l and wheel_r
+unsigned long currentTime, previousTime, elapsedTime;
+float error, error_p;
+float intVal_L, intVal_R, outVal, setPoint;
+float cumError = 0;
+float rateError = 0;
+float PIDOut_L = 0;
+float PIDOut_R = 0;
+//PID Struct
+struct PIDValues{
+	float input = 0;
+	float setPoint = 0;
+	float error = 0;
+	float error_p = 0;
+	float cumError = 0;
+	float rateErorr = 0;
+	float output = 0;
+};
+PIDValues left_wheel;
+PIDValues right_wheel;
+PIDValues left_steer;
+PIDValues right_steer;
+float computePID(struct PIDValues wheel);
+
+char buff1[50];
+int out1;
+char buff2[50];
+int out2;
+
 void set_speed(float Vx, float W){
-	uint8_t direction = 1;
+	uint8_t direction_l = 1;
+	uint8_t direction_r = 1;
 	float _Wl = (Vx - (2.22169002*W))/1.08 ;
 	float _Wr = ((2.22169002*W) + Vx)/1.08;
-	if(Vx < 0){
-	  direction = 0;
+	if(_Wl < 0){
+	  direction_l = 0;
 	  _Wl = -_Wl;
-	  _Wr = -_Wr;
 	 }
-	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR_PWM_Pin,direction);
+	if(_Wr < 0){
+		direction_r = 0;
+		_Wr = -_Wr;
+	}
+	wheel_l = _Wl;
+	wheel_r = _Wr;
+	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR_PWM_Pin,direction_l);
 	 __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, _Wl);
-	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR2_PWM_Pin,direction);
+	HAL_GPIO_WritePin(MOTOR_PWM_GPIO_Port,MOTOR2_PWM_Pin,direction_r);
 	 __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, _Wr);
 }
 /* USER CODE END 0 */
@@ -96,6 +145,21 @@ void set_speed(float Vx, float W){
   * @brief  The application entry point.
   * @retval int
   */
+
+void getTime(){
+	currentTime = millis();
+	elapsedTime = (float)(currentTime-elapsedTime);
+	previousTime = currentTime;
+}
+float computePID(struct PIDValues wheel){
+	wheel.error = wheel.setPoint - wheel.input;
+	wheel.cumError += wheel.error * elapsedTime;
+	wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
+	wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
+	wheel.error_p = wheel.error;
+	return wheel.output
+}
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -141,6 +205,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	//encoder_l =
+	//encoder_r =
+	  getTime();
+	  //Left wheel
+	  left_wheel.input = encoder_l;
+	  left_wheel.setPoint = wheel_l;
+	  //RIGHT WHEEL
+	  right_wheel.input = encoder_r;
+	  right_wheel.setPoint = wheel_r;
+	  PIDOut_L = computePID(left_wheel);
+	  PIDOut_R = computePID(right_wheel);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -392,7 +467,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Ld2_Pin|MOTOR2_PWM_Pin|MOTOR_PWM_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5|MOTOR2_PWM_Pin|MOTOR_PWM_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, MOTOR_DIRECTION1_Pin|MOTOR_DIRECTION2_Pin|MOTOR2_DIRECTION1_Pin|MOTOR2_DIRECTION2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -400,12 +478,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Ld2_Pin MOTOR2_PWM_Pin MOTOR_PWM_Pin */
-  GPIO_InitStruct.Pin = Ld2_Pin|MOTOR2_PWM_Pin|MOTOR_PWM_Pin;
+  /*Configure GPIO pins : PA5 MOTOR2_PWM_Pin MOTOR_PWM_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_5|MOTOR2_PWM_Pin|MOTOR_PWM_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : MOTOR_DIRECTION1_Pin MOTOR_DIRECTION2_Pin MOTOR2_DIRECTION1_Pin MOTOR2_DIRECTION2_Pin */
+  GPIO_InitStruct.Pin = MOTOR_DIRECTION1_Pin|MOTOR_DIRECTION2_Pin|MOTOR2_DIRECTION1_Pin|MOTOR2_DIRECTION2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
@@ -464,7 +549,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	HAL_GPIO_TogglePin(Ld2_GPIO_Port,Ld2_Pin);
+//	HAL_GPIO_TogglePin(Ld2_GPIO_Port,Ld2_Pin);
 
 	encoder_value = htim3.Instance->CNT - 30000;
 	htim3.Instance->CNT = 30000;

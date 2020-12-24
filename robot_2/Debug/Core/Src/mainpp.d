@@ -35,8 +35,7 @@ Core/Src/mainpp.o: ../Core/Src/mainpp.cpp ../Core/Inc/mainpp.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/std_msgs/String.h ../Core/Inc/std_msgs/Float64.h \
- ../Core/Inc/geometry_msgs/Twist.h ../Core/Inc/geometry_msgs/Vector3.h
+ ../Core/Inc/std_msgs/String.h
 
 ../Core/Inc/mainpp.h:
 
@@ -127,9 +126,3 @@ Core/Src/mainpp.o: ../Core/Src/mainpp.cpp ../Core/Inc/mainpp.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Core/Inc/std_msgs/String.h:
-
-../Core/Inc/std_msgs/Float64.h:
-
-../Core/Inc/geometry_msgs/Twist.h:
-
-../Core/Inc/geometry_msgs/Vector3.h:
