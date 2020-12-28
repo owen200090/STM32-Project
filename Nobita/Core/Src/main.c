@@ -101,20 +101,94 @@ float rateError = 0;
 float PIDOut_L = 0;
 float PIDOut_R = 0;
 //PID Struct
-struct PIDValues{
-	float input = 0;
-	float setPoint = 0;
-	float error = 0;
-	float error_p = 0;
-	float cumError = 0;
-	float rateErorr = 0;
-	float output = 0;
-};
-PIDValues left_wheel;
-PIDValues right_wheel;
-PIDValues left_steer;
-PIDValues right_steer;
-float computePID(struct PIDValues wheel);
+//typedef struct PIDValues{
+//	float input = 0;
+//	float setPoint = 	0;
+//	float error = 0;
+//	float error_p = 0;
+//	float cumError = 0;
+//	float rateErorr = 0;
+//	float output = 0;
+//};
+//PIDValues left_wheel;
+//PIDValues right_wheel;
+//PIDValues left_steer;
+//PIDValues right_steer;
+
+float inputleft_wheel = 0;
+float setPointleft_wheel = 0;
+float errorleft_wheel = 0;
+float error_pleft_wheel = 0;
+float cumErrorleft_wheel = 0;
+float rateErorrleft_wheel = 0;
+float outputleft_wheel = 0;
+
+float inputright_wheel = 0;
+float setPointright_wheel = 	0;
+float errorright_wheel = 0;
+float error_pright_wheel = 0;
+float cumErrorright_wheel = 0;
+float rateErorrright_wheel = 0;
+float outputright_wheel = 0;
+
+float inputleft_steer = 0;
+float setPointleft_steer = 	0;
+float errorleft_steer = 0;
+float error_pleft_steer = 0;
+float cumErrorleft_steer = 0;
+float rateErorrleft_steer = 0;
+float outputleft_steer = 0;
+
+float inputright_steer = 0;
+float setPointright_steer = 0;
+float errorright_steer = 0;
+float error_pright_steer = 0;
+float cumErrorright_steer = 0;
+float rateErorrright_steer = 0;
+float outputright_steer = 0;
+
+float computePID(float input, float setpoint){  //float _input, float _setPoint
+  //currentTime = millis();
+  //elapsedTime = (float)(currentTime-elapsedTime);
+  error = setpoint - input;
+  cumError += (error * elapsedTime);
+  rateError += (error - error_p)/elapsedTime;
+  float output = kp*error + ki*cumError + kd*rateError;
+  error_p = error;
+  //previousTime = currentTime;
+  return output;
+}
+
+
+//volatile uint32_t counter = 0;
+//SysTick_Config (SystemCoreClock / 1000);
+//SysTick_Handler(void) {
+//  counter++;
+//}
+//uint32_t millis() {
+//  return counter;
+//}
+
+uint32_t millis(void)
+{
+    uint16_t CURRENT_TIMER1_COUNT = __HAL_TIM_GET_COUNTER(&htim1);
+
+    uint16_t currentMillis = 0;
+    uint16_t systemMillis = 0;
+    if(CURRENT_TIMER1_COUNT>=100)
+    {
+        currentMillis = CURRENT_TIMER1_COUNT/100;
+        systemMillis = systemMillis + currentMillis;
+        __HAL_TIM_SET_COUNTER (&htim1, 0);
+    }
+    return systemMillis;
+}
+
+void getTime(){
+  currentTime = millis();
+  elapsedTime = (float)(currentTime-elapsedTime);
+  previousTime = currentTime;
+}
 
 char buff1[50];
 int out1;
@@ -151,21 +225,6 @@ void set_speed(float Vx, float W){
   * @brief  The application entry point.
   * @retval int
   */
-
-void getTime(){
-	currentTime = millis();
-	elapsedTime = (float)(currentTime-elapsedTime);
-	previousTime = currentTime;
-}
-float computePID(struct PIDValues wheel){
-	wheel.error = wheel.setPoint - wheel.input;
-	wheel.cumError += wheel.error * elapsedTime;
-	wheel.rateErorr += (wheel.error - wheel.error_p)/elapsedTime;
-	wheel.output = kp*wheel.error + ki*wheel.cumError + kd*wheel.rateErorr;
-	wheel.error_p = wheel.error;
-	return wheel.output
-}
-
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -216,13 +275,13 @@ int main(void)
 	//encoder_r =
 	  getTime();
 	  //Left wheel
-	  left_wheel.input = encoder_l;
-	  left_wheel.setPoint = wheel_l;
+	  inputleft_wheel = encoder_l;
+	  setPointleft_wheel = wheel_l;
 	  //RIGHT WHEEL
-	  right_wheel.input = encoder_r;
-	  right_wheel.setPoint = wheel_r;
-	  PIDOut_L = computePID(left_wheel);
-	  PIDOut_R = computePID(right_wheel);
+	  inputright_wheel = encoder_r;
+	  setPointright_wheel = wheel_r;
+	  PIDOut_L = computePID(inputleft_wheel, setPointleft_wheel);
+	  PIDOut_R = computePID(inputright_wheel, setPointright_wheel);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
